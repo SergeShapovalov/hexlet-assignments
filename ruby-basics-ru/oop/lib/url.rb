@@ -17,13 +17,8 @@ class Url
     @path = uri.path
 
     uri_query = uri.query
-    decoded_query = if uri_query.nil?
-        {}
-      else
-        URI.decode_www_form(uri_query)
-    end
-
-    @query = Hash[decoded_query.map{|(k,v)| [k.to_sym,v]}]
+    decoded_query = uri_query.nil? ? [] : URI.decode_www_form(uri_query)
+    @query = decoded_query.map { |k, v| [k.to_sym, v] }.to_h
   end
 
   def query_params

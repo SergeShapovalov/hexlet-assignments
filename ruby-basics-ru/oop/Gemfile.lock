@@ -6,6 +6,7 @@ GEM
     minitest-power_assert (0.3.1)
       minitest
       power_assert (>= 1.1)
+    mutex_m (0.2.0)
     power_assert (2.0.3)
 
 PLATFORMS
@@ -14,7 +15,9 @@ PLATFORMS
 
 DEPENDENCIES
   forwardable
+  minitest
   minitest-power_assert
+  mutex_m
 
 BUNDLED WITH
    2.5.6
