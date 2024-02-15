@@ -3,6 +3,5 @@
 source 'https://rubygems.org'
 
 gem 'forwardable'
-gem 'minitest-power_assert'
 gem 'minitest'
-gem 'mutex_m'
+gem 'minitest-power_assert'

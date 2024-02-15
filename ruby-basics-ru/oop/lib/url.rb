@@ -18,7 +18,7 @@ class Url
 
     uri_query = uri.query
     decoded_query = uri_query.nil? ? [] : URI.decode_www_form(uri_query)
-    @query = decoded_query.map { |k, v| [k.to_sym, v] }.to_h
+    @query = decoded_query.to_h.transform_keys { |key| key.to_sym }
   end
 
   def query_params
