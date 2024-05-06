@@ -2,7 +2,24 @@
   = @user.name
 
 / BEGIN
+h2 #{@user.name} tasks:
 
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th{ scope = 'col' } #
+      th{ scope = 'col' } Name
+      th{ scope = 'col' } Status
+      th
+
+  tbody
+    - @user.tasks.each_with_index do |task, i|
+      tr
+        th{ scope = 'row' } = i + 1
+        td = task.name
+        td = task.status.name
+        td.d-flex
+          .me-4 = link_to 'Show', task
 / END
 hr
 
