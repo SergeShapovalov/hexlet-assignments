@@ -112,7 +112,7 @@ SimpleForm.setup do |config|
   # You can define the class to use on all labels. Default is nil.
   # config.label_class = nil
 
-  # You can define the default class to be used on forms. Can be overriden
+  # You can define the default class to be used on forms_06.05.24_10.33.41. Can be overriden
   # with `html: { :class }`. Defaulting to none.
   # config.default_form_class = nil
 

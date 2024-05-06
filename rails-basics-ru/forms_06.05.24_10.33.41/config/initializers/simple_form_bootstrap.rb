@@ -43,7 +43,7 @@ SimpleForm.setup do |config|
   config.input_field_error_class = 'is-invalid'
   config.input_field_valid_class = 'is-valid'
 
-  # vertical forms
+  # vertical forms_06.05.24_10.33.41
   #
   # vertical default_wrapper
   config.wrappers :vertical_form, class: 'mb-3' do |b|
@@ -147,7 +147,7 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { class: 'form-text' }
   end
 
-  # horizontal forms
+  # horizontal forms_06.05.24_10.33.41
   #
   # horizontal default_wrapper
   config.wrappers :horizontal_form, class: 'row mb-3' do |b|
@@ -261,7 +261,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  # inline forms
+  # inline forms_06.05.24_10.33.41
   #
   # inline default_wrapper
   config.wrappers :inline_form, class: 'col-12' do |b|
@@ -291,7 +291,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  # bootstrap custom forms
+  # bootstrap custom forms_06.05.24_10.33.41
   #
   # custom input switch for boolean
   config.wrappers :custom_boolean_switch, class: 'mb-3' do |b|
