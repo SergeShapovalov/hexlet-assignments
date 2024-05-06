@@ -1,12 +1,10 @@
 require 'faker'
 
-25.times do
-  Task.create({
-    name: Faker::Lorem.sentence,
-    description: Faker::Lorem.paragraph,
-    status: 'new',
-    creator: Faker::Name.name,
-    performer: Faker::Name.name,
-    completed: Faker::Boolean.boolean
-  })
+5.times do
+  Post.create({
+                 title: Faker::Lorem.sentence,
+                 body: Faker::Lorem.paragraph,
+                 summary: Faker::Lorem.sentence,
+                 published: Faker::Boolean.boolean
+               })
 end
