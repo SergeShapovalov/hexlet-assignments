@@ -6,8 +6,34 @@ class Hacker
   class << self
     def hack(email, password)
       # BEGIN
+      host = 'https://rails-collective-blog-ru.hexlet.app'
+      sign_up_path = '/users/sign_up'
+      users_path = '/users'
 
-      
-    # END
+      uri = URI(host)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = uri.scheme == 'https'
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Get.new(URI.join(host, sign_up_path))
+      response = http.request(request)
+      cookie = response.response['set-cookie'].split('; ')[0]
+
+      page = Nokogiri::HTML(response.body)
+      token = page.at('input[@name="authenticity_token"]')['value']
+      post_params = {
+        authenticity_token: token,
+        'user[email]' => email,
+        'user[password]' => password,
+        'user[password_confirmation]' => password
+      }
+
+      request = Net::HTTP::Post.new URI.join(host, users_path)
+      request.body = URI.encode_www_form(post_params)
+      request['Cookie'] = cookie
+
+      http.request(request)
+      # END
+    end
   end
 end
