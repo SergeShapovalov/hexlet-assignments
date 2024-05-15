@@ -5,7 +5,10 @@
 
 .p-3.bg-light
   / BEGIN
-  
+  = simple_form_for @q, url: posts_path, method: :get do |f|
+    = f.input :title_cont
+    = f.input :aasm_state_cont
+    = f.button :submit
   / END
 
 table.table.table-striped.table-hover.mb-5
