@@ -11,6 +11,6 @@ hr
 
 .d-flex
   / BEGIN
-  
+  = link_to t('edit'), edit_post_path(@post), class: 'btn btn-outline-primary me-2'
   / END
   = link_to t('back'), :back, class: 'btn btn-outline-primary'
