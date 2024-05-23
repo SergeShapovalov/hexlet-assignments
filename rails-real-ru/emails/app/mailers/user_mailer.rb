@@ -6,9 +6,13 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.account_activation.subject
   #
-  def account_activation
+  def account_activation(user)
     # BEGIN
-    
+    @user = user
+    @url = url_for(controller: 'users',
+                   action: 'confirm',
+                   confirmation_token: user.confirmation_token)
+    mail(to: @user.email, subject: t('.subject'))
     # END
   end
 end
