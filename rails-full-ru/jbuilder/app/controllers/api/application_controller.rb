@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Api::ApplicationController < ApplicationController
+module Api
+  class ApplicationController < ApplicationController
+  end
 end
