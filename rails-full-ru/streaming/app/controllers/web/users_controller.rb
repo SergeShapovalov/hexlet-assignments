@@ -4,7 +4,7 @@ require 'csv'
 
 class Web::UsersController < Web::ApplicationController
   # BEGIN
-  
+  include ActionController::Live
   # END
 
   def index
@@ -61,7 +61,17 @@ class Web::UsersController < Web::ApplicationController
   end
 
   # BEGIN
-  
+  def stream_csv
+    response.headers['Last-Modified'] = Time.now.httpdate.to_s
+
+    send_stream(filename: 'users.csv') do |stream|
+      stream.write 'id,name,email,created_at,updated_at\n'
+
+      User.find_each do |user|
+        stream.write "#{user.id},#{user.name},#{user.email},#{user.created_at},#{user.updated_at}\n"
+      end
+    end
+  end
   # END
 
   private
