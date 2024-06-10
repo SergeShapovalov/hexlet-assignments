@@ -11,7 +11,7 @@ module HexletCheck
 
     test 'Web::RepositoriesControllerTest has create test method' do
       test_methods = select_methods_starts_with(@test_instance, 'test_should_create')
-      refute_empty test_methods, 'Cant find method starts with "test_should_create"'
+      assert_not_empty test_methods, 'Cant find method starts with "test_should_create"'
     end
   end
 end

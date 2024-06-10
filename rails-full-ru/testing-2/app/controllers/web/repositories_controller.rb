@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # BEGIN
-
+require 'octokit'
 # END
 
 class Web::RepositoriesController < Web::ApplicationController
@@ -19,7 +19,30 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def create
     # BEGIN
-    
+    @repository = Repository.new(permitted_params)
+
+    if @repository.save
+      client = Octokit::Client.new
+
+      octokit_repo = Octokit::Repository.from_url(@repository.link)
+
+      repository_data = client.repository(octokit_repo)
+
+      @repository.update!(
+        repo_name: repository_data[:name],
+        owner_name: repository_data[:owner][:login],
+        description: repository_data[:description],
+        default_branch: repository_data[:default_branch],
+        watchers_count: repository_data[:watchers_count],
+        language: repository_data[:language],
+        repo_created_at: repository_data[:created_at],
+        repo_updated_at: repository_data[:updated_at]
+      )
+      redirect_to @repository, notice: t('success')
+    else
+      flash[:notice] = t('fail')
+      render :new, status: :unprocessable_entity
+    end
     # END
   end
 
