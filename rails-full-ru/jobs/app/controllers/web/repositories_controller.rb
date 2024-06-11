@@ -15,19 +15,35 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def create
     # BEGIN
-    
+    @repository = Repository.new(permitted_params)
+
+    if @repository.save
+      RepositoryLoaderJob.perform_later(@repository.id)
+      redirect_to @repository, notice: t('.success')
+    else
+      flash.now[:alert] = t('.fail')
+      render :new, status: :unprocessable_entity
+    end
     # END
   end
 
   def update
     # BEGIN
-    
+    repository = Repository.find(params[:id])
+
+    RepositoryLoaderJob.perform_later(repository.id)
+    redirect_to repositories_path, notice: t('success')
     # END
   end
 
   def update_repos
     # BEGIN
-    
+    repositories = Repository.all.order(updated_at: :desc)
+    repositories.each do |repository|
+      RepositoryLoaderJob.perform_later(repository.id)
+    end
+
+    redirect_to repositories_path, notice: t('success')
     # END
   end
 
